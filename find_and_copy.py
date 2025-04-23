@@ -25,10 +25,10 @@ def find_and_copy_files(file_names, search_root, destination):
     for file_name in tqdm(file_names, desc="Searching for files", unit="file"):
         logging.info(f"Searching for: {file_name}")
         found = False
-        for file_path in Path(search_root).rglob(f"{file_name}.*"):
-            if file_path.is_file() and file_path.stem == file_name:
-                logging.info(f"Matched: {file_path.name} with stem: {file_path.stem}")
-                dest_path = destination / file_path.name
+        for file_path in Path(search_root).rglob(f"*{file_name}*.*"):
+            if file_path.is_file():
+                logging.info(f"Matched: {file_path.name}")
+                dest_path = destination / f"{file_name}{file_path.suffix}"
                 try:
                     shutil.copy2(file_path, dest_path)
                     logging.info(f"Copied: {file_path} -> {dest_path}")
@@ -41,10 +41,10 @@ def find_and_copy_files(file_names, search_root, destination):
             files_not_found.append(file_name)
 
     if files_not_found:
-        logging.info(f"\nTotal files not found: {len(files_not_found)}")
+        logging.info(f"Total files not found: {len(files_not_found)}")
         logging.info("Missing files:")
         for nf in files_not_found:
-            logging.info(f" - {nf}")
+            logging.info(f"{nf}")
     else:
         logging.info("All files were found and copied successfully.")
 
