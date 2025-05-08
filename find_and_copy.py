@@ -3,10 +3,10 @@ import logging
 import shutil
 from pathlib import Path
 from tqdm import tqdm
-import datetime
+from datetime import datetime
 import argparse
 
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 log_dir = Path('logs')
 log_dir.mkdir(exist_ok=True)
