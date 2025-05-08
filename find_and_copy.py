@@ -3,10 +3,19 @@ import logging
 import shutil
 from pathlib import Path
 from tqdm import tqdm
+import datetime
+import argparse
+
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
+log_dir = Path('logs')
+log_dir.mkdir(exist_ok=True)
+
+log_filename = log_dir / f"find_and_copy_{timestamp}.log"
 
 # Set up logging
 logging.basicConfig(
-    filename='find_and_copy.log',
+    filename=log_filename,
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
